@@ -11,6 +11,12 @@ import AllLandTitle from '@/views/landTitle/AllLandTitleView.vue'
 import UpdateLandTitle from '@/views/landTitle/UpdateLandTitleView.vue'
 import AllAccount from '@/views/account/AllAccountView.vue'
 import AccountDetail from '@/views/account/AccountDetailView.vue'
+import Schedule from '@/views/account/ScheduleView.vue'
+import LoanHistory from '@/views/account/LoanHistoryView.vue'
+import HistoryPayment from '@/views/account/HistoryPaymentView.vue'
+import CreateAccount from '@/views/account/CreateAccountView.vue'
+import Payment from '@/views/account/PaymentView.vue'
+import LoanOverDue from '@/views/account/LoanOverDueView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -76,6 +82,36 @@ const router = createRouter({
       path: '/account/:id',
       name: 'account-detail',
       component: AccountDetail
+    },
+    {
+      path: '/account/scheduleclient/:id',
+      name: 'account-schedule',
+      component: Schedule
+    },
+    {
+      path: '/account/history/:id',
+      name: 'account-history',
+      component: LoanHistory
+    },
+    {
+      path: '/account/pay/history/:id',
+      name: 'account-historyPayment',
+      component: HistoryPayment
+    },
+    {
+      path: '/account/create',
+      name: 'account-create',
+      component: CreateAccount
+    },
+    {
+      path: '/account/pay',
+      name: 'account-pay',
+      component: Payment
+    },
+    {
+      path: '/loanoverdue',
+      name: 'loan-over-due',
+      component: LoanOverDue
     },
     
   ]

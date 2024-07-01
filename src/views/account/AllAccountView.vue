@@ -1,12 +1,16 @@
 <script setup>
 import UserLayout from "../layout/UserLayout.vue";
-import { useRoute } from 'vue-router'
+import {useRouter } from 'vue-router'
 import {useAccountStore} from '@/stores/account.js'
-import { onMounted, ref, computed, reactive } from 'vue'
+import { onMounted } from 'vue'
 
 const accountStore = useAccountStore()
-const route = useRoute()
+const router = useRouter()
 
+const viewAccount=(id)=>{
+  accountStore.chose=0
+  router.push(`/account/${id}`)
+}
 onMounted(async () => {
 
   try {
@@ -28,9 +32,7 @@ onMounted(async () => {
 
     <div class="flex justify-end mr-10">
         <ul class="menu menu-vertical lg:menu-horizontal rounded-box">
-  <li><button class="btn btn-accent">All</button></li>
-  <li><button>Active</button></li>
-  <li><button>Close</button></li>
+  <li><RouterLink :to="{name:'account-create'}"  class="btn btn-info">New</RouterLink></li>
 </ul>
 
     </div>
@@ -76,9 +78,9 @@ onMounted(async () => {
             <td>{{ account.close}}</td>
          
             <td>
-              <RouterLink :to="{name:'account-detail', params: { id: account.id }}"  class=" btn btn-accent mr-11">
+              <button @click="viewAccount(account.id)" class=" btn btn-accent mr-11">
                 View
-              </RouterLink>
+              </button>
             </td>
 
 

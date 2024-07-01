@@ -8,6 +8,11 @@ export const useAccountStore = defineStore('account', {
     accounts: [],
     account: {},
     searchId: "",
+    chose:0,
+    schedule:{},
+    history:{},
+    historyPayments:[],
+    canvas:null,
 
   }),
   actions: {
@@ -35,66 +40,92 @@ export const useAccountStore = defineStore('account', {
         console.log('error ', error)
       }
     },
-    async addClient(client) {
-      console.log("post ..")
-      const bodyData = {
-
-        "name": client.name,
-        "sex": client.sex,
-        "dob": client.dob,
-        "cid": client.cid,
-        "address": client.address,
-        "job": client.job,
-        "salary": client.salary,
-        "education": client.education,
-        "status": client.status,
-        "phone": client.phone,
-
+    async loadSchedule(id) {
+      try {
+        const response = await axios.get(`${BASE_RUL}/${id}/scheduleclient`)
+        this.schedule = response.data
+        console.log("Debug:  ")
+        console.log(this.schedule)
 
       }
-      console.log(bodyData)
-      console.log(bodyData)
-      try {
-
-        await axios.post(`${BASE_RUL}`, bodyData)
-      } catch (error) {
+      catch (error) {
         console.log('error ', error)
       }
     },
-    async updateLandTitle(id, landTitle) {
-      console.log("put ..")
-  
-      const bodyData = {
-        "id":id,
-        "type": landTitle.type,
-        "confirmBy": landTitle.confirmBy,
-        "firstOwner": landTitle.firstOwner,
-        "secondOwner":landTitle.secondOwner,
-        "area": landTitle.area,
-        "address": landTitle.address,
-        "accountId":landTitle.accountId,
+   
+    async loadHistory(id) {
+      try {
+        const response = await axios.get(`${BASE_RUL}/history/${id}`)
+        this.history = response.data
+        console.log("Debug:  ")
+        console.log(this.history)
+
+      }
+      catch (error) {
+        console.log('error ', error)
+      }
+    },
+   
+    async loadHistoryPayments(id) {
+      try {
+        const response = await axios.get(`${BASE_RUL}/pay/${id}`)
+        this.historyPayments = response.data
+        console.log("Debug:  ")
+        console.log(this.historyPayments)
+
+      }
+      catch (error) {
+        console.log('error ', error)
+      }
+    },
+    async addAccount(accountInfo) {
+
+      const bodyData={
+        "amount":accountInfo.amount,
+        "term":accountInfo.term,
+        "rate":accountInfo.rate,
+        "coId":accountInfo.coId,
+        "aaId":accountInfo.aaId,
+        "bmId":accountInfo.bmId,
+        "firstMemberId":accountInfo.firstMemberId,
+        "secondMemberId":accountInfo.secondMemberId
+       }
+      try {
+        console.log("wow ....")
+        await axios.post(`${BASE_RUL}`,bodyData)  
+      }
+      catch (error) {
+        console.log('error ', error)
+      }
+    },
+    async pay(payInfo) {
      
-      }
-
-      console.log(bodyData)
-
+      const bodyData={
+        "accountId":payInfo.accountId,
+        "amount":payInfo.amount,
+        
+       }
       try {
-
-        await axios.put(`${BASE_RUL}/${id}`, bodyData)
-      } catch (error) {
+        console.log("wow ....")
+        await axios.post(`${BASE_RUL}/pay`,bodyData)  
+      }
+      catch (error) {
         console.log('error ', error)
       }
     },
-    async removeDepartment(id) {
-
+    async runSystem() {
+     
+      
       try {
-        await axios.delete(`${BASE_RUL}/${id}`)
-
-      } catch (error) {
+        console.log("wow ....")
+        await axios.post(`${BASE_RUL}/runsystem`)  
+      }
+      catch (error) {
         console.log('error ', error)
       }
     },
-
+   
+   
   }
 
 })

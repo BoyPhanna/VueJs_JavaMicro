@@ -45,6 +45,8 @@ watch(searchText, (newText) => {
       <li><RouterLink :to="{name:'all-client-info'}">Clients</RouterLink></li>
       <li><RouterLink :to="{name:'all-landTitles'}">LandTitles</RouterLink></li>
       <li><RouterLink :to="{name:'all-account'}">Accounts</RouterLink></li>
+      <li><RouterLink :to="{name:'account-pay'}">Payment</RouterLink></li>
+      <li><RouterLink :to="{name:'loan-over-due'}">Loan Over due</RouterLink></li>
   
      
     </ul>

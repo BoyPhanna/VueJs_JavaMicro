@@ -1,6 +1,12 @@
 <script setup>
 import UserLayout  from './layout/UserLayout.vue';
 import CEO from '@/assets/ceo.jpg'
+import {useAccountStore} from '@/stores/account.js'
+import { onMounted } from 'vue';
+const accountStore=useAccountStore()
+onMounted(async()=>{
+  await accountStore.runSystem()
+})
 </script>
 
 <template>
