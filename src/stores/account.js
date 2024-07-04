@@ -13,9 +13,21 @@ export const useAccountStore = defineStore('account', {
     history:{},
     historyPayments:[],
     canvas:null,
+    loanOverdues:{},
+    barOption:{},
+  
 
   }),
   actions: {
+     saveChose(){
+      localStorage.setItem('chose', JSON.stringify(this.chose));
+    },
+     loadChose(){
+      const savedState = localStorage.getItem('chose');
+            if (savedState) {
+                this.chose = JSON.parse(savedState);
+            }
+    },
     async findAccountById(id) {
       try {
         const response = await axios.get(`${BASE_RUL}/${id}`)
@@ -72,6 +84,33 @@ export const useAccountStore = defineStore('account', {
         this.historyPayments = response.data
         console.log("Debug:  ")
         console.log(this.historyPayments)
+
+      }
+      catch (error) {
+        console.log('error ', error)
+      }
+    },
+    async loadLoanOverDues() {
+      try {
+        const response = await axios.get(`${BASE_RUL}/overdue`)
+        this.loanOverdues = response.data
+        console.log("Debug:  ")
+        console.log(this.loanOverdues)
+
+        this.barOption={
+          options: {
+            chart: {
+              id: 'vuechart-example'
+            },
+            xaxis: {
+              categories: this.loanOverdues.years
+            }
+          },
+          series: [{
+            name: 'account ',
+            data: this.loanOverdues.loanDisburses
+          }]
+        }
 
       }
       catch (error) {

@@ -9,6 +9,7 @@ const router = useRouter()
 
 const viewAccount=(id)=>{
   accountStore.chose=0
+  accountStore.saveChose()
   router.push(`/account/${id}`)
 }
 onMounted(async () => {

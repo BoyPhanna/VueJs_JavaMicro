@@ -2,9 +2,10 @@
 import UserLayout from '../layout/UserLayout.vue';
 import { reactive,ref,onMounted } from 'vue';
 import { useClientStore } from '@/stores/client.js';
-import { useRoute } from 'vue-router';
+import { useRouter } from 'vue-router';
+import Swal from 'sweetalert2'
 const clientStore=useClientStore()
-const route=useRoute()
+const router=useRouter()
 const test=ref('')
 const clientInfo=reactive(
     {
@@ -29,7 +30,14 @@ const addClient=async ()=>{
   try{
         console.log("try to add")
       await clientStore.addClient(clientInfo)
-   
+      Swal.fire({
+  position: "top-center",
+  icon: "success",
+  title: "New Client has been saved",
+  showConfirmButton: false,
+  timer: 1500
+});
+router.back()
   
   }catch(error){
     console.log('error ',error)

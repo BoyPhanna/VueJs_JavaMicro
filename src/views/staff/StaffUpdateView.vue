@@ -2,9 +2,14 @@
 import UserLayout from '../layout/UserLayout.vue';
 import { reactive,ref,onMounted } from 'vue';
 import { useStaffStore } from '@/stores/staff.js';
-import { useRoute } from 'vue-router';
+import { useRoute,useRouter } from 'vue-router';
+import Swal from 'sweetalert2'
+
+
+
 const staffStore=useStaffStore()
 const route=useRoute()
+const router=useRouter()
 const test=ref('')
 const staffInfo=reactive(
     {
@@ -41,7 +46,13 @@ const updateStaff=async ()=>{
   try{
         console.log("try to upddate")
       await staffStore.updateStaff(route.params.id,staffInfo)
-
+router.back()
+      Swal.fire({
+  title: 'Success!',
+  text: 'Update Success',
+  icon: 'success',
+  confirmButtonText: 'Okay'
+})
   
   }catch(error){
     console.log('error ',error)
@@ -53,7 +64,7 @@ const updateStaff=async ()=>{
 
 <template>
     
-<h1>{{ staffInfo.status }}</h1>
+
     <UserLayout>
         <div class="bg-white w-3/5 p-10 rounded-lg mx-auto mt-10">
 

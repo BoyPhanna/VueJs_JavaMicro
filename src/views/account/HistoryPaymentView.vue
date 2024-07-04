@@ -65,7 +65,7 @@ const printTable = () => {
               <div>ឈ្មោះអតិថិជន : {{ accountStore.history.firsMemberName }}</div>
               <div>ឈ្មោះអតិថិជន : {{ accountStore.history.secondMemberName }}</div>
               <div>មន្រ្ដីឥណទាន : {{ accountStore.history.coName }}</div>
-              <div>បេឡា : {{ accountStore.history.aaName }} ខែ</div>
+              <div>គណនេយ្យករ : {{ accountStore.history.aaName }} </div>
             </div>
           </div>
 
@@ -89,7 +89,6 @@ const printTable = () => {
                   <td>{{ row.id }}</td>
                   <td>{{ row.date }}</td>
                   <td>{{ row.amount}}</td>
-                
                 </tr>
               </tbody>
             </table>

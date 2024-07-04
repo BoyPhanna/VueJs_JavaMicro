@@ -2,9 +2,12 @@
 import UserLayout from '../layout/UserLayout.vue';
 import { reactive,ref,onMounted } from 'vue';
 import { useStaffStore } from '@/stores/staff.js';
-import { useRoute } from 'vue-router';
+import { useRoute,useRouter } from 'vue-router';
+import Swal from 'sweetalert2'
+
 const staffStore=useStaffStore()
 const route=useRoute()
+const router=useRouter()
 const test=ref('')
 const staffInfo=reactive(
     {
@@ -30,7 +33,14 @@ const addStaff=async ()=>{
         console.log("try to add")
       await staffStore.addStaff(staffInfo)
    
-  
+      router.back()
+      Swal.fire({
+  title: 'Success!',
+  text: 'Add new staff Success',
+  icon: 'success',
+  confirmButtonText: 'Okay'
+})
+
   }catch(error){
     console.log('error ',error)
   }

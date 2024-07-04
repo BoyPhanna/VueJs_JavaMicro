@@ -1,14 +1,14 @@
 <script setup>
 import UserLayout from "../layout/UserLayout.vue";
-import { useRoute } from 'vue-router'
+
 import { useClientStore } from '@/stores/client.js';
-import { onMounted, ref, computed, reactive } from 'vue'
+import { onMounted, } from 'vue'
+import Swal from 'sweetalert2'
 
 const clientStore = useClientStore()
-const route = useRoute()
+
 
 onMounted(async () => {
-
   try {
     await clientStore.loadClients()
   
@@ -17,9 +17,23 @@ onMounted(async () => {
   catch (error) {
     console.log('error ', error)
   }
-
-
 })
+const deleteClient= (id)=>Swal.fire({
+  title: "Do you want to Delete this Client?",
+  showDenyButton: true,
+
+  confirmButtonText: "Cancel",
+  denyButtonText: `Delete`
+}).then(async (result) => {
+  /* Read more about isConfirmed, isDenied below */
+  if (result.isConfirmed) {
+    Swal.fire("Cancel!", "", "info");
+  } else if (result.isDenied) {
+    Swal.fire("Deleted", "", "success");
+    await clientStore.deleteClient(id)
+    await clientStore.loadClients()
+  }
+});
 </script>
 <template>
 
@@ -69,6 +83,11 @@ onMounted(async () => {
             <td>{{ client.education }}</td>
             <td>{{ client.status }}</td>
             <td>{{ client.phone }}</td>
+            <td>
+              <button  v-if="!client.haveAccount"  @click="deleteClient(client.id)" class=" btn btn-error mr-11">
+                Delete
+              </button>
+            </td>
             <td>
               <RouterLink :to="{name:'update-client', params: { id: client.id }}"  class=" btn btn-accent mr-11">
                 Edit

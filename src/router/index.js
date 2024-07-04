@@ -9,6 +9,7 @@ import AddNewClient from '@/views/client/AddNewClientView.vue'
 import UpdateClientInfo from '@/views/client/UpdateClientnfo.vue'
 import AllLandTitle from '@/views/landTitle/AllLandTitleView.vue'
 import UpdateLandTitle from '@/views/landTitle/UpdateLandTitleView.vue'
+import AddLandTitle from '@/views/landTitle/AddLandTitleView.vue'
 import AllAccount from '@/views/account/AllAccountView.vue'
 import AccountDetail from '@/views/account/AccountDetailView.vue'
 import Schedule from '@/views/account/ScheduleView.vue'
@@ -17,6 +18,9 @@ import HistoryPayment from '@/views/account/HistoryPaymentView.vue'
 import CreateAccount from '@/views/account/CreateAccountView.vue'
 import Payment from '@/views/account/PaymentView.vue'
 import LoanOverDue from '@/views/account/LoanOverDueView.vue'
+
+
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -66,6 +70,11 @@ const router = createRouter({
       path: '/landtitle',
       name: 'all-landTitles',
       component: AllLandTitle
+    },
+    {
+      path: '/landtitle/add',
+      name: 'add-landTitles',
+      component: AddLandTitle
     },
     {
       path: '/landtitle/update/:id',

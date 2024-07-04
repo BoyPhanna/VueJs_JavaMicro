@@ -1,10 +1,12 @@
 <script setup>
 import UserLayout from '../layout/UserLayout.vue';
-import { reactive,onMounted } from 'vue';
+import { reactive } from 'vue';
 import { useLandTitleStore } from '@/stores/landTitle.js';
-import { useRoute } from 'vue-router';
+import { useRouter } from 'vue-router';
+import Swal from 'sweetalert2'
+
 const landTitleStore=useLandTitleStore()
-const route=useRoute()
+const router=useRouter()
 
 const landTitleInfo=reactive(
     {
@@ -20,25 +22,20 @@ const landTitleInfo=reactive(
 }
 )
 
-onMounted(async()=>{
-    await landTitleStore.findLandTitleById(route.params.id);
-    landTitleInfo.type=landTitleStore.landTitle.type
-    landTitleInfo.confirmBy=landTitleStore.landTitle.confirmBy
-    landTitleInfo.firstOwner=landTitleStore.landTitle.firstOwner
-    landTitleInfo.secondOwner=landTitleStore.landTitle.secondOwner
-    landTitleInfo.area=landTitleStore.landTitle.area
-    landTitleInfo.address=landTitleStore.landTitle.address
-    landTitleInfo.accountId=landTitleStore.landTitle.accountId
-    landTitleInfo.accountName=landTitleStore.landTitle.accountName
 
-   
-})
-const updateLandTitle=async ()=>{
+const addLandTitle=async ()=>{
 
   try{
-        console.log("try to upddate")
-      await landTitleStore.updateLandTitle(route.params.id,landTitleInfo)
-
+        console.log("try to add")
+      await landTitleStore.addLandTitle(landTitleInfo)
+      Swal.fire({
+  position: "top-center",
+  icon: "success",
+  title: "Land title has been saved",
+  showConfirmButton: false,
+  timer: 1500
+});
+router.back()
   
   }catch(error){
     console.log('error ',error)
@@ -97,11 +94,8 @@ const updateLandTitle=async ()=>{
                 
               
             </div>
-         
-
-
         
-            <button @click="updateLandTitle()" class="btn btn-info">Save</button>
+            <button @click="addLandTitle()" class="btn btn-info">Save</button>
              </div>
     </UserLayout>
 

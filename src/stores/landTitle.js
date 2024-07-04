@@ -35,32 +35,7 @@ export const useLandTitleStore = defineStore('landTitle', {
         console.log('error ', error)
       }
     },
-    async addClient(client) {
-      console.log("post ..")
-      const bodyData = {
 
-        "name": client.name,
-        "sex": client.sex,
-        "dob": client.dob,
-        "cid": client.cid,
-        "address": client.address,
-        "job": client.job,
-        "salary": client.salary,
-        "education": client.education,
-        "status": client.status,
-        "phone": client.phone,
-
-
-      }
-      console.log(bodyData)
-      console.log(bodyData)
-      try {
-
-        await axios.post(`${BASE_RUL}`, bodyData)
-      } catch (error) {
-        console.log('error ', error)
-      }
-    },
     async updateLandTitle(id, landTitle) {
       console.log("put ..")
   
@@ -85,7 +60,31 @@ export const useLandTitleStore = defineStore('landTitle', {
         console.log('error ', error)
       }
     },
-    async removeDepartment(id) {
+    async addLandTitle(landTitle) {
+      console.log("put ..")
+  
+      const bodyData = {
+       
+        "type": landTitle.type,
+        "confirmBy": landTitle.confirmBy,
+        "firstOwner": landTitle.firstOwner,
+        "secondOwner":landTitle.secondOwner,
+        "area": landTitle.area,
+        "address": landTitle.address,
+        "accountId":landTitle.accountId,
+     
+      }
+
+      console.log(bodyData)
+
+      try {
+
+        await axios.post(`${BASE_RUL}`, bodyData)
+      } catch (error) {
+        console.log('error ', error)
+      }
+    },
+    async deleteLandTitle(id) {
 
       try {
         await axios.delete(`${BASE_RUL}/${id}`)

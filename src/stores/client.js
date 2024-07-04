@@ -35,6 +35,16 @@ export const useClientStore = defineStore('client',{
             console.log('error ',error)
           }
         },
+        async deleteClient(id){
+          try{
+            await axios.delete(`${BASE_RUL}/${id}`)
+            await this.loadClients()
+            
+          }
+          catch(error){
+            console.log('error ',error)
+          }
+        },
         async addClient(client){
             console.log("post ..")
             const bodyData={

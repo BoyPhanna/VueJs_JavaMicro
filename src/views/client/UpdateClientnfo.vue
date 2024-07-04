@@ -2,9 +2,12 @@
 import UserLayout from '../layout/UserLayout.vue';
 import { reactive,ref,onMounted } from 'vue';
 import { useClientStore } from '@/stores/client.js';
-import { useRoute } from 'vue-router';
+import { useRoute,useRouter } from 'vue-router';
+import Swal from 'sweetalert2'
+
 const clientStore=useClientStore()
 const route=useRoute()
+const router=useRouter()
 const test=ref('')
 const clientInfo=reactive(
     {
@@ -34,27 +37,22 @@ onMounted(async ()=>{
     clientInfo.status=clientStore.client.status
     clientInfo.phone=clientStore.client.phone
 })
-const addClient=async ()=>{
 
-  try{
-        console.log("try to add")
-      await clientStore.addClient(clientInfo)
-   
-  
-  }catch(error){
-    console.log('error ',error)
-  }
-
-}
 const updateClient=async ()=>{
     await clientStore.updateClient(route.params.id,clientInfo);
+    router.back()
+
+      Swal.fire({
+  title: 'Success!',
+  text: 'Update Success',
+  icon: 'success',
+  confirmButtonText: 'Okay'
+})
 }
 
 </script>
 
 <template>
-    
-<h1>{{ clientStore.client }}</h1>
     <UserLayout>
         <div class="bg-white w-3/5 p-10 rounded-lg mx-auto mt-10">
 
