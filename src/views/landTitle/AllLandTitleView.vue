@@ -39,22 +39,18 @@ const deleteLandTitle= (id)=>Swal.fire({
 });
 </script>
 <template>
-
+  
   <UserLayout>
-
-<div class="flex justify-end pr-10">
-  <RouterLink :to="{name:'add-landTitles'}" class="btn btn-info">New</RouterLink>
-</div>
-    <div class="stats shadow">
-
-
+    <div class="flex justify-end pr-10">
+      <RouterLink :to="{name:'add-landTitles'}" class="btn btn-info">New</RouterLink>
     </div>
-
-
-    <div class="overflow-x-auto">
-      <table class="table table-xl  table-zebra">
+    <div class="stats shadow">
+    </div>
+    <div class="pl-[67px] pr-[50px] mb-[10px] text-[20px] font-bold">All Land Title</div>
+    <div class="overflow-x-auto pl-[67px] pr-[50px]">
+      <table class="table table-xl table-zebra">
         <thead>
-          <tr>
+          <tr class="text-[18px] bg-gray-200 rounded-xl">
             <th>No</th>
             <th>ID</th>
             <th>First Owner</th>
@@ -64,41 +60,35 @@ const deleteLandTitle= (id)=>Swal.fire({
             <th>Address</th>
             <th>Account ID</th>
             <th>Account Name</th>
-         
-
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(landTitle, index) in landTitleStore.landTitles" :key="landTitle.id">
-            <th>{{ index + 1 }}</th>
-            <th>{{ landTitle.id }}</th>
-            <td>{{ landTitle.firstOwner}}</td>
-            <td>{{ landTitle.secondOwner }}</td>
-            <td>{{ landTitle.type}}</td>
-            <td>{{ landTitle.area }}</td>
-            <td>{{ landTitle.address }}</td>
-            <td>{{ landTitle.accountId }}</td>
-            <td>{{ landTitle.accountName }}</td>
-         
+            <th class="text-[16px] font-semibold">{{ index + 1 }}</th>
+            <th class="text-[16px] font-semibold">{{ landTitle.id }}</th>
+            <td class="text-[16px] font-semibold">{{ landTitle.firstOwner }}</td>
+            <td class="text-[16px] font-semibold">{{ landTitle.secondOwner }}</td>
+            <td class="text-[16px] font-semibold">{{ landTitle.type }}</td>
+            <td class="text-[16px] font-semibold">{{ landTitle.area }}</td>
+            <td class="text-[16px] font-semibold">{{ landTitle.address }}</td>
+            <td class="text-[16px] font-semibold">{{ landTitle.accountId }}</td>
+            <td class="text-[16px] font-semibold">{{ landTitle.accountName }}</td>
             <td>
               <button @click="deleteLandTitle(landTitle.id)"  class=" btn btn-error mr-11">
                 Delete
               </button>
             </td>
             <td>
-              <RouterLink :to="{name:'landTitle-update', params: { id: landTitle.id }}"  class=" btn btn-accent mr-11">
+              <RouterLink :to="{ name: 'landTitle-update', params: { id: landTitle.id } }"
+                class=" btn btn-accent mr-11  text-white bg-[#008000ab] hover:bg-[#00800063]">
                 Edit
               </RouterLink>
             </td>
-
-
           </tr>
-
         </tbody>
-
       </table>
     </div>
-
   </UserLayout>
-
+  
 </template>
