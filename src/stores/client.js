@@ -8,6 +8,7 @@ export const useClientStore = defineStore('client',{
       clients:[],
       client:{},
       searchId:"",
+      clientFilter:[],
     
     }),
     actions:{

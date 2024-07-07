@@ -24,14 +24,7 @@ watch(searchText, (newText) => {
             </svg>
           </label>
         </div>
-        <div class="flex-none gap-2">
-          <div class="form-control w-[300px] h-[40px] ">
-
-            <input v-model="searchText" type="text" placeholder="Search"
-              class="input input-bordered w-24 md:w-auto border-2 rounded-xl" />
-
-          </div>
-        </div>
+        
       </div>
       <!-- Content -->
       <slot></slot>

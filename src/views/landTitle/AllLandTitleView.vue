@@ -2,15 +2,29 @@
 import UserLayout from "../layout/UserLayout.vue";
 
 import {useLandTitleStore} from '@/stores/landTitle.js'
-import { onMounted} from 'vue'
+import { onMounted,watch,ref} from 'vue'
 import Swal from 'sweetalert2'
 const landTitleStore = useLandTitleStore()
-
+const search=ref('')
+watch(search,()=>{
+  console.log(search.value)
+  landTitleStore.landTitleFilter=landTitleStore.landTitles.filter(landTitle=>{
+    let numberPattern = /^-?\d+(\.\d+)?$/;
+    if(numberPattern.test(search.value)){
+        // console.log("number")
+        // console.log(`${client.id} = ${search.value} : ${client.id===Number(search.value)}`)
+      return landTitle.id.toString().includes(search.value)
+    }
+     
+    return landTitle.firstOwner.includes(search.value) 
+  })
+})
 
 onMounted(async () => {
 
   try {
     await landTitleStore.loadLandTitles();
+          landTitleStore.landTitleFilter= landTitleStore.landTitles;
   
   
   }
@@ -42,6 +56,14 @@ const deleteLandTitle= (id)=>Swal.fire({
   
   <UserLayout>
     <div class="flex justify-end pr-10">
+      <div class="flex-none gap-2">
+          <div class="form-control w-[300px] h-[40px] ">
+
+            <input v-model="search" type="text" placeholder="Search"
+              class="input input-bordered w-24 md:w-auto border-2 rounded-xl" />
+
+          </div>
+      </div>
       <RouterLink :to="{name:'add-landTitles'}" class="btn btn-info">New</RouterLink>
     </div>
     <div class="stats shadow">
@@ -64,7 +86,7 @@ const deleteLandTitle= (id)=>Swal.fire({
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(landTitle, index) in landTitleStore.landTitles" :key="landTitle.id">
+          <tr v-for="(landTitle, index) in landTitleStore.landTitleFilter" :key="landTitle.id">
             <th class="text-[16px] font-semibold">{{ index + 1 }}</th>
             <th class="text-[16px] font-semibold">{{ landTitle.id }}</th>
             <td class="text-[16px] font-semibold">{{ landTitle.firstOwner }}</td>

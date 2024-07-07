@@ -2,21 +2,35 @@
 import UserLayout from "../layout/UserLayout.vue";
 
 import { useClientStore } from '@/stores/client.js';
-import { onMounted, } from 'vue'
+import { onMounted,watch,ref } from 'vue'
 import Swal from 'sweetalert2'
 
 const clientStore = useClientStore()
-
+const search=ref('')
 
 onMounted(async () => {
   try {
     await clientStore.loadClients()
+    clientStore.clientFilter=clientStore.clients
   
   
   }
   catch (error) {
     console.log('error ', error)
   }
+})
+watch(search,()=>{
+  console.log(search.value)
+  clientStore.clientFilter=clientStore.clients.filter(client=>{
+    let numberPattern = /^-?\d+(\.\d+)?$/;
+    if(numberPattern.test(search.value)){
+        console.log("number")
+        console.log(`${client.id} = ${search.value} : ${client.id===Number(search.value)}`)
+      return client.id.toString().includes(search.value)
+    }
+     
+    return client.name.includes(search.value)
+  })
 })
 const deleteClient= (id)=>Swal.fire({
   title: "Do you want to Delete this Client?",
@@ -40,6 +54,14 @@ const deleteClient= (id)=>Swal.fire({
 <UserLayout>
     <div class="flex flex-row justify-between pr-[50px] pl-10">
       <div class="text-3xl font-bold  ml-[30px] mt-[10px]">All Clients</div>
+      <div class="flex-none gap-2">
+          <div class="form-control w-[300px] h-[40px] ">
+
+            <input v-model="search" type="text" placeholder="Search"
+              class="input input-bordered w-24 md:w-auto border-2 rounded-xl" />
+
+          </div>
+        </div>
       <RouterLink :to="{name:'add-new-client'}" class="btn btn-info bg-[#0000ffca] text-white capitalize hover:bg-[#0000ffa7] mt-[10px]">Add new client
       </RouterLink>
     </div>
@@ -65,7 +87,7 @@ const deleteClient= (id)=>Swal.fire({
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(client, index) in clientStore.clients" :key="client.id"
+          <tr v-for="(client, index) in clientStore.clientFilter" :key="client.id"
           >
             <th class="text-[16px]">{{ index + 1 }}</th>
             <th class="text-[16px]">{{ client.id }}</th>

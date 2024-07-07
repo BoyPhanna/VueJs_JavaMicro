@@ -1,6 +1,6 @@
 <script setup>
 import UserLayout from "../layout/UserLayout.vue";
-import {onMounted,ref,computed, reactive} from 'vue'
+import {onMounted,ref, reactive,watch} from 'vue'
 import { useDepartmentStore } from '@/stores/department.js';
 
 const departmentStore=useDepartmentStore()
@@ -11,10 +11,27 @@ const department=reactive({
     name:"",
     imageURL:""
 })
+const search=ref('')
+watch(search,()=>{
+  console.log(search.value)
+  departmentStore.departmentFilter=departmentStore.list.filter(department=>{
+    let numberPattern = /^-?\d+(\.\d+)?$/;
+    if(numberPattern.test(search.value)){
+        // console.log("number")
+        // console.log(`${client.id} = ${search.value} : ${client.id===Number(search.value)}`)
+      return department.id.toString().includes(search.value)
+    }
+     
+    return department.name.includes(search.value) 
+  })
+})
+
 onMounted(async()=>{
   isLoading.value=true
   try{
     await departmentStore.loadDepartments()
+    departmentStore.departmentFilter=departmentStore.list
+
   }
   catch(error){
     console.log('error ',error)
@@ -81,10 +98,18 @@ const updateOrAddDepartment=()=>{
 <template>
 
     <UserLayout>
+        <div class="flex-none gap-2">
+          <div class="form-control w-[300px] h-[40px] ">
+
+            <input v-model="search" type="text" placeholder="Search"
+              class="input input-bordered w-24 md:w-auto border-2 rounded-xl" />
+
+          </div>
+      </div>
         <div class="flex py-11 px-36 space-x-8  w-full h-full">
             <div class="flex-1">
                 <div class="grid grid-cols-4 gap-4">
-                    <div class="card card-compact w-full bg-sky-50 shadow-xl" v-for="department in departmentStore.list" :key="department.id">
+                    <div class="card card-compact w-full bg-sky-50 shadow-xl" v-for="department in departmentStore.departmentFilter" :key="department.id">
                         <figure>
                             <img class="h-48 w-full object-cover"
                                 :src="department.imageURL"

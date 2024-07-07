@@ -5,6 +5,7 @@ const BASE_RUL = 'http://localhost:8080/department'
 export const useDepartmentStore = defineStore('department',{
     state:()=>({
       list:[],
+      departmentFilter:[],
       staffs:[],
       searchId:"",
       statuses:['Pending','Doing','Done']

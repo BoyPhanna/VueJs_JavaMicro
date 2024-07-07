@@ -30,7 +30,10 @@ const printTable = () => {
   <UserLayout>
     <AccountLayout>
       <div class="flex justify-end pr-52">
-        <button class="btn btn-info" @click="printTable">Print Table</button>
+   
+
+<img @click="printTable()"  alt="Vue logo" class=" w-11 h-11 mr-[2px]" src="@/assets/icon/print.svg" />
+
       </div>
 
       <div class="bg-white px-28 py-32 w-3/5 p-10 rounded-lg mx-auto mt-10">

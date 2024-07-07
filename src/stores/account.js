@@ -6,6 +6,7 @@ export const useAccountStore = defineStore('account', {
   state: () => ({
     list: [],
     accounts: [],
+    accountFilter:[],
     account: {},
     searchId: "",
     chose:0,

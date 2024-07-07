@@ -64,7 +64,12 @@ onMounted(async () => {
 <template>
   <UserLayout>
     <h1 class="text-4xl mb-4">Loan over due</h1>
-    <button @click="printTable()" class="btn btn-info ">Print</button>
+    <div class="flex justify-end pr-10">
+
+      <img @click="printTable()"  alt="Vue logo" class=" w-11 h-11 mr-[2px]" src="@/assets/icon/print.svg" />
+
+    </div>
+
     <div class="tablePrint">
 
           <div class="bg-white w-full p-10 rounded-lg mx-auto mt-10 ">
