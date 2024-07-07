@@ -13,7 +13,7 @@ const department=reactive({
 })
 const search=ref('')
 watch(search,()=>{
-  console.log(search.value)
+//   console.log(search.value)
   departmentStore.departmentFilter=departmentStore.list.filter(department=>{
     let numberPattern = /^-?\d+(\.\d+)?$/;
     if(numberPattern.test(search.value)){

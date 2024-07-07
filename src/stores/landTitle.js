@@ -7,6 +7,7 @@ export const useLandTitleStore = defineStore('landTitle', {
     list: [],
     landTitles: [],
     landTitle: {},
+    landTitleFilter: [],
     searchId: "",
 
   }),

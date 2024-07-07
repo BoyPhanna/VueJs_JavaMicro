@@ -7,7 +7,19 @@ import Swal from 'sweetalert2'
 
 const clientStore = useClientStore()
 const search=ref('')
-
+watch(search,()=>{
+  console.log(search.value)
+  clientStore.clientFilter=clientStore.clients.filter(client=>{
+    let numberPattern = /^-?\d+(\.\d+)?$/;
+    if(numberPattern.test(search.value)){
+        // console.log("number")
+        // console.log(`${client.id} = ${search.value} : ${client.id===Number(search.value)}`)
+      return client.id.toString().includes(search.value)
+    }
+     
+    return client.name.includes(search.value)
+  })
+})
 onMounted(async () => {
   try {
     await clientStore.loadClients()
@@ -19,19 +31,7 @@ onMounted(async () => {
     console.log('error ', error)
   }
 })
-watch(search,()=>{
-  console.log(search.value)
-  clientStore.clientFilter=clientStore.clients.filter(client=>{
-    let numberPattern = /^-?\d+(\.\d+)?$/;
-    if(numberPattern.test(search.value)){
-        console.log("number")
-        console.log(`${client.id} = ${search.value} : ${client.id===Number(search.value)}`)
-      return client.id.toString().includes(search.value)
-    }
-     
-    return client.name.includes(search.value)
-  })
-})
+
 const deleteClient= (id)=>Swal.fire({
   title: "Do you want to Delete this Client?",
   showDenyButton: true,
@@ -61,7 +61,7 @@ const deleteClient= (id)=>Swal.fire({
               class="input input-bordered w-24 md:w-auto border-2 rounded-xl" />
 
           </div>
-        </div>
+      </div>
       <RouterLink :to="{name:'add-new-client'}" class="btn btn-info bg-[#0000ffca] text-white capitalize hover:bg-[#0000ffa7] mt-[10px]">Add new client
       </RouterLink>
     </div>
