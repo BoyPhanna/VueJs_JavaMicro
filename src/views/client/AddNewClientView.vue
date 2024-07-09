@@ -1,54 +1,54 @@
 <script setup>
 import UserLayout from '../layout/UserLayout.vue';
-import { reactive,ref,onMounted } from 'vue';
+import { reactive, ref, onMounted } from 'vue';
 import { useClientStore } from '@/stores/client.js';
 import { useRouter } from 'vue-router';
 import Swal from 'sweetalert2'
-const clientStore=useClientStore()
-const router=useRouter()
-const test=ref('')
-const clientInfo=reactive(
+const clientStore = useClientStore()
+const router = useRouter()
+const test = ref('')
+const clientInfo = reactive(
     {
-    "name": "ខ",
-    "sex": "M",
-    "dob": "2001-10-10",
-    "cid": "03993838",
-    "address": "TBK",
-    "job": "Programmer",
-    "salary": 300.0,
-    "education": "Bechelor",
-    "status": false,
-    "phone":"01233445"
-}
+        "name": "ខ",
+        "sex": "M",
+        "dob": "2001-10-10",
+        "cid": "03993838",
+        "address": "TBK",
+        "job": "Programmer",
+        "salary": 300.0,
+        "education": "Bechelor",
+        "status": false,
+        "phone": "01233445"
+    }
 )
 
-onMounted(()=>{
-    
-})
-const addClient=async ()=>{
+onMounted(() => {
 
-  try{
+})
+const addClient = async () => {
+
+    try {
         console.log("try to add")
-      await clientStore.addClient(clientInfo)
-      Swal.fire({
-  position: "top-center",
-  icon: "success",
-  title: "New Client has been saved",
-  showConfirmButton: false,
-  timer: 1500
-});
-router.back()
-  
-  }catch(error){
-    console.log('error ',error)
-  }
+        await clientStore.addClient(clientInfo)
+        Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "New Client has been saved",
+            showConfirmButton: false,
+            timer: 1500
+        });
+        router.back()
+
+    } catch (error) {
+        console.log('error ', error)
+    }
 
 }
 
 </script>
 
 <template>
-    
+
 
     <UserLayout>
         <div class="bg-white w-3/5 p-10 rounded-lg mx-auto mt-10">

@@ -1,55 +1,54 @@
 <script setup>
 import UserLayout from '../layout/UserLayout.vue';
-import { reactive,onMounted } from 'vue';
+import { reactive, onMounted } from 'vue';
 import { useLandTitleStore } from '@/stores/landTitle.js';
 import { useRoute } from 'vue-router';
-const landTitleStore=useLandTitleStore()
-const route=useRoute()
+const landTitleStore = useLandTitleStore()
+const route = useRoute()
 
-const landTitleInfo=reactive(
+const landTitleInfo = reactive(
     {
-      
-    "type": "លិខិតផ្ទេរសិទ្ធ",
-    "confirmBy": "ចៅសង្កាត់",
-    "firstOwner": "kkk",
-    "secondOwner": "BB",
-    "area": 22.33,
-    "address": "បឹងសាឡាង",
-    "accountId": 703,
-    "accountName": "ខ"
-}
+        "type": "លិខិតផ្ទេរសិទ្ធ",
+        "confirmBy": "ចៅសង្កាត់",
+        "firstOwner": "kkk",
+        "secondOwner": "BB",
+        "area": 22.33,
+        "address": "បឹងសាឡាង",
+        "accountId": 703,
+        "accountName": "ខ"
+    }
 )
 
-onMounted(async()=>{
+onMounted(async () => {
     await landTitleStore.findLandTitleById(route.params.id);
-    landTitleInfo.type=landTitleStore.landTitle.type
-    landTitleInfo.confirmBy=landTitleStore.landTitle.confirmBy
-    landTitleInfo.firstOwner=landTitleStore.landTitle.firstOwner
-    landTitleInfo.secondOwner=landTitleStore.landTitle.secondOwner
-    landTitleInfo.area=landTitleStore.landTitle.area
-    landTitleInfo.address=landTitleStore.landTitle.address
-    landTitleInfo.accountId=landTitleStore.landTitle.accountId
-    landTitleInfo.accountName=landTitleStore.landTitle.accountName
+    landTitleInfo.type = landTitleStore.landTitle.type
+    landTitleInfo.confirmBy = landTitleStore.landTitle.confirmBy
+    landTitleInfo.firstOwner = landTitleStore.landTitle.firstOwner
+    landTitleInfo.secondOwner = landTitleStore.landTitle.secondOwner
+    landTitleInfo.area = landTitleStore.landTitle.area
+    landTitleInfo.address = landTitleStore.landTitle.address
+    landTitleInfo.accountId = landTitleStore.landTitle.accountId
+    landTitleInfo.accountName = landTitleStore.landTitle.accountName
 
-   
+
 })
-const updateLandTitle=async ()=>{
+const updateLandTitle = async () => {
 
-  try{
+    try {
         console.log("try to upddate")
-      await landTitleStore.updateLandTitle(route.params.id,landTitleInfo)
+        await landTitleStore.updateLandTitle(route.params.id, landTitleInfo)
 
-  
-  }catch(error){
-    console.log('error ',error)
-  }
+
+    } catch (error) {
+        console.log('error ', error)
+    }
 
 }
 
 </script>
 
 <template>
-    
+
 
     <UserLayout>
         <div class="bg-white w-3/5 p-10 rounded-lg mx-auto mt-10">

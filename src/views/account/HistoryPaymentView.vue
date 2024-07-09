@@ -31,7 +31,7 @@ const printTable = () => {
   <UserLayout>
     <AccountLayout>
       <div class="flex justify-end pr-52">
-        <img @click="printTable()"  alt="Vue logo" class=" w-11 h-11 mr-[2px]" src="@/assets/icon/print.svg" />
+        <img @click="printTable()" alt="Vue logo" class=" w-11 h-11 mr-[2px]" src="@/assets/icon/print.svg" />
 
       </div>
 
@@ -44,11 +44,11 @@ const printTable = () => {
             <div>ប្រវត្ដិការសងប្រាក់</div>
           </div>
           <div class="flex flex-row justify-start">
-            
-        <div class="qr-code-container">
-        
-        </div>
-       
+
+            <div class="qr-code-container">
+
+            </div>
+
           </div>
           <!-- Loan information -->
           <div class="flex flex-row justify-between">
@@ -77,11 +77,9 @@ const printTable = () => {
               <thead>
                 <tr>
                   <th>ល.រ</th>
-               
                   <th>លេខការទូទាត់</th>
                   <th>ពេលវេលា</th>
                   <th>ចំនួនទឹកប្រាក់</th>
-                 
                 </tr>
               </thead>
               <tbody>
@@ -89,7 +87,7 @@ const printTable = () => {
                   <th>{{ index + 1 }}</th>
                   <td>{{ row.id }}</td>
                   <td>{{ row.date }}</td>
-                  <td>{{ row.amount}}</td>
+                  <td>{{ row.amount }}</td>
                 </tr>
               </tbody>
             </table>
@@ -107,11 +105,9 @@ const printTable = () => {
     padding: 0 !important;
     margin: 0 !important;
   }
-
   .tablePrint * {
     visibility: visible;
   }
-
   .tablePrint canvas {
     display: block !important;
     width: auto !important;

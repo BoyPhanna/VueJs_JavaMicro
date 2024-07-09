@@ -41,17 +41,15 @@ onMounted(async ()=>{
 const updateClient=async ()=>{
     await clientStore.updateClient(route.params.id,clientInfo);
     router.back()
-
-      Swal.fire({
-  title: 'Success!',
-  text: 'Update Success',
-  icon: 'success',
-  confirmButtonText: 'Okay'
+    Swal.fire({
+    title: 'Success!',
+    text: 'Update Success',
+    icon: 'success',
+    confirmButtonText: 'Okay'
 })
 }
 
 </script>
-
 <template>
     <UserLayout>
         <div class="bg-white w-3/5 p-10 rounded-lg mx-auto mt-10">

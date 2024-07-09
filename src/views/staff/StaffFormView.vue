@@ -11,11 +11,11 @@ const router=useRouter()
 const test=ref('')
 const staffInfo=reactive(
     {
-    "name":"ក​",
+    "name":"Vichhai",
     "sex":"M",
     "dob":"2000-03-03",
     "cid":"02359844",
-    "address":"ភ្នំពេញ",
+    "address":"Phone Penh",
     "status":false,
     "salary":200,
     "startWork":"2023-05-12",

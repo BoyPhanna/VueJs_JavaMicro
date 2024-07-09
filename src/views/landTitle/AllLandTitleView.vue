@@ -1,22 +1,22 @@
 <script setup>
 import UserLayout from "../layout/UserLayout.vue";
 
-import {useLandTitleStore} from '@/stores/landTitle.js'
-import { onMounted,watch,ref} from 'vue'
+import { useLandTitleStore } from '@/stores/landTitle.js'
+import { onMounted, watch, ref } from 'vue'
 import Swal from 'sweetalert2'
 const landTitleStore = useLandTitleStore()
-const search=ref('')
-watch(search,()=>{
+const search = ref('')
+watch(search, () => {
   console.log(search.value)
-  landTitleStore.landTitleFilter=landTitleStore.landTitles.filter(landTitle=>{
+  landTitleStore.landTitleFilter = landTitleStore.landTitles.filter(landTitle => {
     let numberPattern = /^-?\d+(\.\d+)?$/;
-    if(numberPattern.test(search.value)){
-        // console.log("number")
-        // console.log(`${client.id} = ${search.value} : ${client.id===Number(search.value)}`)
+    if (numberPattern.test(search.value)) {
+      // console.log("number")
+      // console.log(`${client.id} = ${search.value} : ${client.id===Number(search.value)}`)
       return landTitle.id.toString().includes(search.value)
     }
-     
-    return landTitle.firstOwner.includes(search.value) 
+
+    return landTitle.firstOwner.includes(search.value)
   })
 })
 
@@ -24,18 +24,14 @@ onMounted(async () => {
 
   try {
     await landTitleStore.loadLandTitles();
-          landTitleStore.landTitleFilter= landTitleStore.landTitles;
-  
-  
+    landTitleStore.landTitleFilter = landTitleStore.landTitles;
   }
   catch (error) {
     console.log('error ', error)
   }
-
-
 })
 
-const deleteLandTitle= (id)=>Swal.fire({
+const deleteLandTitle = (id) => Swal.fire({
   title: "Do you want to Delete this land title?",
   showDenyButton: true,
 
@@ -53,18 +49,16 @@ const deleteLandTitle= (id)=>Swal.fire({
 });
 </script>
 <template>
-  
+
   <UserLayout>
     <div class="flex justify-end pr-10">
       <div class="flex-none gap-2">
-          <div class="form-control w-[300px] h-[40px] ">
-
-            <input v-model="search" type="text" placeholder="Search"
-              class="input input-bordered w-24 md:w-auto border-2 rounded-xl" />
-
-          </div>
+        <div class="form-control w-[300px] h-[40px] ">
+          <input v-model="search" type="text" placeholder="Search"
+            class="input input-bordered w-24 md:w-auto border-2 rounded-xl" />
+        </div>
       </div>
-      <RouterLink :to="{name:'add-landTitles'}" class="btn btn-info">New</RouterLink>
+      <RouterLink :to="{ name: 'add-landTitles' }" class="btn btn-info">New</RouterLink>
     </div>
     <div class="stats shadow">
     </div>
@@ -97,7 +91,7 @@ const deleteLandTitle= (id)=>Swal.fire({
             <td class="text-[16px] font-semibold">{{ landTitle.accountId }}</td>
             <td class="text-[16px] font-semibold">{{ landTitle.accountName }}</td>
             <td>
-              <button @click="deleteLandTitle(landTitle.id)"  class=" btn btn-error mr-11">
+              <button @click="deleteLandTitle(landTitle.id)" class=" btn btn-error mr-11">
                 Delete
               </button>
             </td>
@@ -112,5 +106,5 @@ const deleteLandTitle= (id)=>Swal.fire({
       </table>
     </div>
   </UserLayout>
-  
+
 </template>
