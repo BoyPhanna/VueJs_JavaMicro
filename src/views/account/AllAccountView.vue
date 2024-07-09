@@ -88,7 +88,7 @@ onMounted(async () => {
         </thead>
         <tbody>
           <tr v-if="accountStore.accountFilter.length === 0">
-            <td colspan="15" class="text-center text-[14px] text-gray-500">No account available</td>
+            <td colspan="15" class="text-center text-[16px] font-semibold text-gray-500">No account available</td>
           </tr>
           <tr v-for="(account, index) in accountStore.accountFilter" :key="account.id">
             <th>{{ index + 1 }}</th>

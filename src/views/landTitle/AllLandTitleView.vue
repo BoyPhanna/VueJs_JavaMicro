@@ -51,14 +51,16 @@ const deleteLandTitle = (id) => Swal.fire({
 <template>
 
   <UserLayout>
-    <div class="flex justify-end pr-10">
+    <div class="flex justify-end pr-10 mt-[10px]">
       <div class="flex-none gap-2">
-        <div class="form-control w-[300px] h-[40px] ">
+        <div class="form-control w-[300px] h-[45px] mr-[10px]">
           <input v-model="search" type="text" placeholder="Search"
             class="input input-bordered w-24 md:w-auto border-2 rounded-xl" />
         </div>
       </div>
-      <RouterLink :to="{ name: 'add-landTitles' }" class="btn btn-info">New</RouterLink>
+      <!-- class="btn btn-info" -->
+      <RouterLink :to="{ name: 'add-landTitles' }"
+        class="p-[10px] bg-primary text-white pl-[15px] pr-[15px] rounded-xl">New</RouterLink>
     </div>
     <div class="stats shadow">
     </div>
@@ -80,7 +82,10 @@ const deleteLandTitle = (id) => Swal.fire({
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(landTitle, index) in landTitleStore.landTitleFilter" :key="landTitle.id">
+          <tr v-if="landTitleStore.landTitleFilter.length === 0">
+            <td colspan="11" class="text-center text-[16px] font-semibold text-gray-500">No land title available</td>
+          </tr>
+          <tr v-else v-for="(landTitle, index) in landTitleStore.landTitleFilter" :key="landTitle.id">
             <th class="text-[16px] font-semibold">{{ index + 1 }}</th>
             <th class="text-[16px] font-semibold">{{ landTitle.id }}</th>
             <td class="text-[16px] font-semibold">{{ landTitle.firstOwner }}</td>
@@ -91,13 +96,13 @@ const deleteLandTitle = (id) => Swal.fire({
             <td class="text-[16px] font-semibold">{{ landTitle.accountId }}</td>
             <td class="text-[16px] font-semibold">{{ landTitle.accountName }}</td>
             <td>
-              <button @click="deleteLandTitle(landTitle.id)" class=" btn btn-error mr-11">
+              <button @click="deleteLandTitle(landTitle.id)" class="btn btn-error mr-11">
                 Delete
               </button>
             </td>
             <td>
               <RouterLink :to="{ name: 'landTitle-update', params: { id: landTitle.id } }"
-                class=" btn btn-accent mr-11  text-white bg-[#008000ab] hover:bg-[#00800063]">
+                class="btn btn-accent mr-11 text-white bg-[#008000ab] hover:bg-[#00800063]">
                 Edit
               </RouterLink>
             </td>
