@@ -30,39 +30,40 @@ const printTable = () => {
 <template>
   <UserLayout>
     <AccountLayout>
-      <div class="flex justify-end pr-52">
-        <img @click="printTable()" alt="Vue logo" class=" w-11 h-11 mr-[2px]" src="@/assets/icon/print.svg" />
-
+      <div class="flex justify-end relative top-[10%] right-[10%] cursor-pointer ">
+        <div class="">
+          <img @click="printTable()" alt="Vue logo" class=" w-8 h-8 mr-[2px]" src="@/assets/icon/print.svg" />
+          <p class="text-[16px] font-semibold">prinf</p>
+        </div>
       </div>
-
       <div class="bg-white px-28 py-32 w-3/5 p-10 rounded-lg mx-auto mt-10">
         <div class="bg-white tablePrint">
-          <div class="flex flex-row justify-start">
-            <div class="font-bold underline text-2xl text-black">Love Microfinance LTD.</div>
+          <div class="grid grid-rows-2">
+            <div class="font-bold underline text-2xl text-black m-auto capitalize">Love Microfinance LTD.</div>
+            <div class="m-auto text-[18px] font-semibold">ប្រវត្ដិការសងប្រាក់</div>
           </div>
-          <div class="font-bold text-2xl underline flex flex-row justify-center">
-            <div>ប្រវត្ដិការសងប្រាក់</div>
-          </div>
-          <div class="flex flex-row justify-start">
 
+          <div class="flex flex-row justify-start">
             <div class="qr-code-container">
 
             </div>
-
           </div>
           <!-- Loan information -->
-          <div class="flex flex-row justify-between">
+          <div class="flex flex-row justify-between mt-[10px] mb-[10px]">
             <!-- left -->
-            <div class="flex flex-col">
-              <div>លេខគណនីយ : {{ accountStore.history.id }}</div>
-              <div>ទឹកប្រាក់កម្ចី : {{ accountStore.history.amount }} ដុល្លា</div>
-              <div>រយៈពេល : {{ accountStore.history.term }} ខែ</div>
-              <div>អត្រាការប្រាក់ : {{ accountStore.history.rate }} % ក្នុងមួយខែ</div>
-              <div>កាលបរិច្ឆេទបើកប្រាក់ : {{ accountStore.history.debusdate }}</div>
-              <div>អាសយដ្ឋាន : {{ accountStore.history.address }}</div>
+            <div class="ml-[15px] ">
+              <div class="flex">លេខគណនីយ <p class="ml-[63px] mr-[10px]">:</p> {{ accountStore.schedule.id }}</div>
+              <div class="flex">ទឹកប្រាក់កម្ចី <p class="ml-[69px] mr-[10px]">:</p> {{ accountStore.schedule.amount }}
+                ដុល្លា</div>
+              <div class="flex">រយៈពេល <p class="ml-[98px] mr-[10px]">:</p> {{ accountStore.schedule.term }} ខែ</div>
+              <div class="flex">អត្រាការប្រាក់ <p class="ml-[62px] mr-[10px]">:</p> {{ accountStore.schedule.rate }} %
+                ក្នុងមួយខែ</div>
+              <div class="flex">កាលបរិច្ឆេទបើកប្រាក់ <p class="ml-[5px] mr-[12px]">:</p> {{ accountStore.schedule.debusdate }}</div>
+              <div class="flex">អាសយដ្ឋាន <p class="ml-[78px] mr-[12px]"> : </p> {{ accountStore.schedule.address }}
+              </div>
             </div>
             <!-- right -->
-            <div class="flex flex-col">
+            <div class="flex flex-col text-right">
               <div>ឈ្មោះអតិថិជន : {{ accountStore.history.firsMemberName }}</div>
               <div>ឈ្មោះអតិថិជន : {{ accountStore.history.secondMemberName }}</div>
               <div>មន្រ្ដីឥណទាន : {{ accountStore.history.coName }}</div>
@@ -105,9 +106,11 @@ const printTable = () => {
     padding: 0 !important;
     margin: 0 !important;
   }
+
   .tablePrint * {
     visibility: visible;
   }
+
   .tablePrint canvas {
     display: block !important;
     width: auto !important;

@@ -89,22 +89,23 @@ const updateOrAddDepartment = () => {
   }
 }
 
-
-
 </script>
 
 <template>
 
   <UserLayout>
+
     <div class="flex-none gap-2">
       <div class="form-control w-[300px] h-[40px] m-auto mt-[10px]">
         <input v-model="search" type="text" placeholder="Search department"
           class="input input-bordered w-24 md:w-auto border-2 rounded-xl" />
       </div>
     </div>
+
     <div class="flex py-11 px-36 space-x-8  w-full h-full">
       <div class="flex-1 relative">
-        <div v-if="departmentStore.departmentFilter.length === 0" class="text-center text-xl text-gray-500 absolute top-[50%] left-[50%]">
+        <div v-if="departmentStore.departmentFilter.length === 0"
+          class="text-center text-xl text-gray-500 absolute top-[50%] left-[50%]">
           <p class="text-[70px] mb-[20px]">?</p>
           No department available
         </div>
@@ -133,7 +134,6 @@ const updateOrAddDepartment = () => {
             </div>
           </div>
         </div>
-
       </div>
 
       <!-- Form -->

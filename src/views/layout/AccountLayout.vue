@@ -37,7 +37,7 @@ onMounted(()=>{
 </script>
 
 <template>
- <div role="tablist" class="tabs tabs-boxed">
+ <div role="tablist" class="tabs tabs-boxed w-[94%] mt-[10px] mb-[-30px] m-auto">
             <a @click="choseTap(0)" role="tab" :class="accountStore.chose===0?'tab tab-active':'tab'">Account infomation</a>
             <a @click="choseTap(1)" role="tab" :class="accountStore.chose===1?'tab tab-active':'tab'">Loan History</a>
             <a @click="choseTap(2)" role="tab" :class="accountStore.chose===2?'tab tab-active':'tab'">Schedule</a>

@@ -47,7 +47,8 @@ const addAccount = async () => {
                 </div>
             </div>
             <!-- class="btn btn-info" -->
-            <button @click="addAccount()" class="p-[10px] pl-[15px] pr-[15px] bg-primary text-white rounded-xl font-semibold hover:bg-[#0000ffb0]">Save</button>
+            <button @click="addAccount()"
+                class="p-[10px] pl-[15px] pr-[15px] bg-primary text-white rounded-xl font-semibold hover:bg-[#0000ffb0]">Save</button>
         </div>
     </UserLayout>
 

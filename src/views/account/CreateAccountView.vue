@@ -2,7 +2,9 @@
 import UserLayout from '../layout/UserLayout.vue';
 import { reactive, ref, onMounted } from 'vue';
 import { useAccountStore } from '@/stores/account.js';
-import { useRoute } from 'vue-router';
+import { useRoute ,useRouter} from 'vue-router';
+import Swal from 'sweetalert2'
+const router = useRouter()
 const accountStore = useAccountStore()
 const route = useRoute()
 const test = ref('')
@@ -24,10 +26,19 @@ onMounted(() => {
 
 })
 const addAccount = async () => {
-
     try {
         console.log("try to add")
+
         await accountStore.addAccount(accountInfo)
+        Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "New Account Create successful",
+            showConfirmButton: false,
+            timer: 1500
+        });
+        router.back()
+        
     } catch (error) {
         console.log('error ', error)
     }
@@ -55,21 +66,24 @@ const addAccount = async () => {
                         placeholder="John" required />
                 </div>
                 <div>
-                    <label for="last_name" class="block mb-2 text-[16px] font-semibold text-gray-900 dark:text-white">Rate
+                    <label for="last_name"
+                        class="block mb-2 text-[16px] font-semibold text-gray-900 dark:text-white">Rate
                     </label>
                     <input v-model="accountInfo.rate" type="text" id="last_name"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Doe" required />
                 </div>
                 <div>
-                    <label for="company" class="block mb-2 text-[16px] font-semibold text-gray-900 dark:text-white">Credit
+                    <label for="company"
+                        class="block mb-2 text-[16px] font-semibold text-gray-900 dark:text-white">Credit
                         Officer ID</label>
                     <input v-model="accountInfo.coId" type="number" id="company"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Flowbite" required />
                 </div>
                 <div>
-                    <label for="company" class="block mb-2 text-[16px] font-semibold text-gray-900 dark:text-white">Accounten
+                    <label for="company"
+                        class="block mb-2 text-[16px] font-semibold text-gray-900 dark:text-white">Accounten
                         ID</label>
                     <input v-model="accountInfo.aaId" type="number" id="company"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -84,13 +98,15 @@ const addAccount = async () => {
                         required />
                 </div>
                 <div>
-                    <label class="block mb-2 text-[16px] font-semibold text-gray-900 dark:text-white">First member ID</label>
+                    <label class="block mb-2 text-[16px] font-semibold text-gray-900 dark:text-white">First member
+                        ID</label>
                     <input v-model="accountInfo.firstMemberId" type="number" min="100"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required />
                 </div>
                 <div>
-                    <label class="block mb-2 text-[16px] font-semibold text-gray-900 dark:text-white">Second member ID</label>
+                    <label class="block mb-2 text-[16px] font-semibold text-gray-900 dark:text-white">Second member
+                        ID</label>
                     <input v-model="accountInfo.secondMemberId" type="number" min="100"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required />

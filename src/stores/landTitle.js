@@ -17,7 +17,6 @@ export const useLandTitleStore = defineStore('landTitle', {
         const response = await axios.get(`${BASE_RUL}/${id}`)
         this.landTitle = response.data
         console.log(this.landTitle)
-
       }
       catch (error) {
         console.log('error ', error)
@@ -39,17 +38,17 @@ export const useLandTitleStore = defineStore('landTitle', {
 
     async updateLandTitle(id, landTitle) {
       console.log("put ..")
-  
+
       const bodyData = {
-        "id":id,
+        "id": id,
         "type": landTitle.type,
         "confirmBy": landTitle.confirmBy,
         "firstOwner": landTitle.firstOwner,
-        "secondOwner":landTitle.secondOwner,
+        "secondOwner": landTitle.secondOwner,
         "area": landTitle.area,
         "address": landTitle.address,
-        "accountId":landTitle.accountId,
-     
+        "accountId": landTitle.accountId,
+
       }
 
       console.log(bodyData)
@@ -63,17 +62,17 @@ export const useLandTitleStore = defineStore('landTitle', {
     },
     async addLandTitle(landTitle) {
       console.log("put ..")
-  
+
       const bodyData = {
-       
+
         "type": landTitle.type,
         "confirmBy": landTitle.confirmBy,
         "firstOwner": landTitle.firstOwner,
-        "secondOwner":landTitle.secondOwner,
+        "secondOwner": landTitle.secondOwner,
         "area": landTitle.area,
         "address": landTitle.address,
-        "accountId":landTitle.accountId,
-     
+        "accountId": landTitle.accountId,
+
       }
 
       console.log(bodyData)

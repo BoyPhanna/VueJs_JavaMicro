@@ -82,10 +82,10 @@ const deleteLandTitle = (id) => Swal.fire({
           </tr>
         </thead>
         <tbody>
-          <tr v-if="landTitleStore.landTitleFilter.length === 0">
+          <!-- <tr v-if="landTitleStore.landTitleFilter.length === 0">
             <td colspan="11" class="text-center text-[16px] font-semibold text-gray-500">No land title available</td>
-          </tr>
-          <tr v-else v-for="(landTitle, index) in landTitleStore.landTitleFilter" :key="landTitle.id">
+          </tr> -->
+          <tr v-for="(landTitle, index) in landTitleStore.landTitleFilter" :key="landTitle.id">
             <th class="text-[16px] font-semibold">{{ index + 1 }}</th>
             <th class="text-[16px] font-semibold">{{ landTitle.id }}</th>
             <td class="text-[16px] font-semibold">{{ landTitle.firstOwner }}</td>
