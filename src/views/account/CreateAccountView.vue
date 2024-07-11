@@ -13,7 +13,7 @@ const accountInfo = reactive(
         "amount": 6000,
         "term": 48,
         "rate": 1.5,
-        "debusdate": "2024-04-12",
+        // "debusdate": "2023-04-12",
         "coId": 1,
         "aaId": 2,
         "bmId": 3,

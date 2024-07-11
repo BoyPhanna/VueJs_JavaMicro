@@ -16,6 +16,7 @@ export const useAccountStore = defineStore('account', {
     canvas:null,
     loanOverdues:{},
     barOption:{},
+    showSuccess:false,
   
 
   }),
@@ -124,6 +125,7 @@ export const useAccountStore = defineStore('account', {
         "amount":accountInfo.amount,
         "term":accountInfo.term,
         "rate":accountInfo.rate,
+        // "debusdate": accountInfo.debusdate,
         "coId":accountInfo.coId,
         "aaId":accountInfo.aaId,
         "bmId":accountInfo.bmId,
@@ -139,15 +141,21 @@ export const useAccountStore = defineStore('account', {
       }
     },
     async pay(payInfo) {
-     
+     this.showSuccess=false
       const bodyData={
         "accountId":payInfo.accountId,
         "amount":payInfo.amount,
         
        }
       try {
-        console.log("wow ....")
-        await axios.post(`${BASE_RUL}/pay`,bodyData)  
+        console.log(`Id : ${bodyData.accountId}`)
+        const response =await axios.post(`${BASE_RUL}/pay`,bodyData)  
+        console.log(`status : ${response.data}`)
+       
+        
+        if(response.data==='Successfully'){
+          this.showSuccess=true
+        }
       }
       catch (error) {
         console.log('error ', error)

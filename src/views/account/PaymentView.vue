@@ -3,6 +3,8 @@ import UserLayout from '../layout/UserLayout.vue';
 import { reactive, ref, onMounted } from 'vue';
 import { useAccountStore } from '@/stores/account.js';
 import { useRoute } from 'vue-router';
+import Swal from 'sweetalert2'
+
 const accountStore = useAccountStore()
 const route = useRoute()
 const test = ref('')
@@ -20,6 +22,26 @@ const addAccount = async () => {
     try {
         console.log("try to add")
         await accountStore.pay(payInfo)
+
+        if(accountStore.showSuccess){
+            Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Payment success",
+            showConfirmButton: false,
+            timer: 1500
+        });
+
+        }
+        else{
+            Swal.fire({
+            position: "top-center",
+            icon: "error",
+            title: "Incorect Data",
+            showConfirmButton: false,
+            timer: 1500
+        });
+        }
     } catch (error) {
         console.log('error ', error)
     }

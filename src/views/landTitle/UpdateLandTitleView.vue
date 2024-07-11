@@ -2,9 +2,12 @@
 import UserLayout from '../layout/UserLayout.vue';
 import { reactive, onMounted } from 'vue';
 import { useLandTitleStore } from '@/stores/landTitle.js';
-import { useRoute } from 'vue-router';
+import { useRoute,useRouter } from 'vue-router';
+import Swal from 'sweetalert2'
+
 const landTitleStore = useLandTitleStore()
 const route = useRoute()
+const router = useRouter()
 
 const landTitleInfo = reactive(
     {
@@ -37,6 +40,16 @@ const updateLandTitle = async () => {
     try {
         console.log("try to upddate")
         await landTitleStore.updateLandTitle(route.params.id, landTitleInfo)
+        await landTitleStore.loadLandTitles()
+     landTitleStore.landTitleFilter = landTitleStore.landTitles;
+     Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Update Land Title Success",
+            showConfirmButton: false,
+            timer: 1500
+        });
+     router.back()
 
 
     } catch (error) {

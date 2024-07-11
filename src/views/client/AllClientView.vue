@@ -4,7 +4,7 @@ import UserLayout from "../layout/UserLayout.vue";
 import { useClientStore } from '@/stores/client.js';
 import { onMounted, watch, ref } from 'vue'
 import Swal from 'sweetalert2'
-import Edit from '@/assets/icon/pen-to-square-regular (1).svg'
+
 
 const clientStore = useClientStore()
 const search = ref('')
@@ -44,6 +44,8 @@ const deleteClient = (id) => Swal.fire({
     Swal.fire("Deleted", "", "success");
     await clientStore.deleteClient(id)
     await clientStore.loadClients()
+    clientStore.clientFilter = clientStore.clients
+
   }
 });
 </script>
@@ -108,6 +110,10 @@ const deleteClient = (id) => Swal.fire({
             <td>
               <button v-if="!client.haveAccount" @click="deleteClient(client.id)"
                 class="p-[10px] bg-[red] hover:bg-[#ff000077] text-white font-semibold rounded-xl">
+                Delete
+              </button>
+              <button v-if="client.haveAccount" 
+                class="p-[10px] text-transparent">
                 Delete
               </button>
               <RouterLink :to="{ name: 'update-client', params: { id: client.id } }"

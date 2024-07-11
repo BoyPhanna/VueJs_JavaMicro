@@ -45,6 +45,7 @@ export const useDepartmentStore = defineStore('department',{
             try{
                 
               await axios.post(`${BASE_RUL}`,bodyData)
+              await loadDepartments()
             }catch(error){
               console.log('error ',error)
             }
@@ -60,6 +61,7 @@ export const useDepartmentStore = defineStore('department',{
             try{
                 
               await axios.put(`${BASE_RUL}/${id}`,bodyData)
+              await loadDepartments()
             }catch(error){
               console.log('error ',error)
             }
@@ -68,7 +70,7 @@ export const useDepartmentStore = defineStore('department',{
          
             try{
                 await axios.delete(`${BASE_RUL}/${id}`)
-  
+                await loadDepartments()
             }catch(error){
               console.log('error ',error)
             }

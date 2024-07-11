@@ -2,6 +2,7 @@
 import UserLayout from "../layout/UserLayout.vue";
 import { onMounted, ref, reactive, watch } from 'vue'
 import { useDepartmentStore } from '@/stores/department.js';
+import Swal from 'sweetalert2'
 
 const departmentStore = useDepartmentStore()
 const isLoading = ref(false)
@@ -44,26 +45,48 @@ const addDepartment = async () => {
     console.log("try to add")
     await departmentStore.addDepartment(department)
     await departmentStore.loadDepartments()
+    departmentStore.departmentFilter = departmentStore.list
     department.id = 0;
     department.name = ""
     department.imageURL = ""
+    Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "New Department has been saved",
+            showConfirmButton: false,
+            timer: 1500
+        });
   } catch (error) {
     console.log('error ', error)
   }
   isLoading.value = false
 }
-const deleteDepartment = async (id) => {
-  isLoading.value = true
-  try {
-    console.log("try to add")
-    await departmentStore.removeDepartment(id)
-    await departmentStore.loadDepartments()
+const deleteDepartment = (id) => Swal.fire({
+  title: "Do you want to Delete this Client?",
+  showDenyButton: true,
+  confirmButtonText: "Cancel",
+  denyButtonText: `Delete`
+}).then(async (result) => {
+  /* Read more about isConfirmed, isDenied below */
+  if (result.isConfirmed) {
+    Swal.fire("Cancel!", "", "info");
+  } else if (result.isDenied) {
+    isLoading.value = true
 
-  } catch (error) {
-    console.log('error ', error)
+    try {
+
+      await departmentStore.removeDepartment(id)
+      await departmentStore.loadDepartments()
+      departmentStore.departmentFilter = departmentStore.list
+      Swal.fire("Deleted", "", "success");
+
+    } catch (error) {
+      console.log('error ', error)
+    }
+    isLoading.value = false
   }
-  isLoading.value = false
-}
+})
+
 const editDepartment = async (id, name, imageURL) => {
   department.id = id
   department.name = name
@@ -75,10 +98,18 @@ const updateDepartment = async () => {
 
   await departmentStore.updateDepartment(department.id, department)
   await departmentStore.loadDepartments()
+  departmentStore.departmentFilter = departmentStore.list
   isUpdate.value = false
   department.id = 0;
   department.name = ""
   department.imageURL = ""
+  Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "New Department has been saved",
+            showConfirmButton: false,
+            timer: 1500
+        });
 }
 const updateOrAddDepartment = () => {
   if (isUpdate.value) {
@@ -157,7 +188,7 @@ const updateOrAddDepartment = () => {
             <div class=" flex justify-end mt-[10px] mr-[10px]">
               <button @click="updateOrAddDepartment()"
                 class="p-[10px] pl-[15px] pr-[15px] bg-[#0000ffd0] hover:bg-[#0000ff95] text-white font-semibold rounded-xl">{{
-                  isUpdate ? "Update" : "Save" }}</button>
+          isUpdate ? "Update" : "Save" }}</button>
             </div>
           </dev>
         </div>

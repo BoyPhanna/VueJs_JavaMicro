@@ -45,6 +45,8 @@ const deleteLandTitle = (id) => Swal.fire({
     Swal.fire("Deleted", "", "success");
     await landTitleStore.deleteLandTitle(id)
     await landTitleStore.loadLandTitles()
+    landTitleStore.landTitleFilter = landTitleStore.landTitles;
+
   }
 });
 </script>

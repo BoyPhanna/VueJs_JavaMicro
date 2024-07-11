@@ -67,7 +67,7 @@ const printTable = () => {
               <div>ឈ្មោះអតិថិជន : {{ accountStore.history.firsMemberName }}</div>
               <div>ឈ្មោះអតិថិជន : {{ accountStore.history.secondMemberName }}</div>
               <div>មន្រ្ដីឥណទាន : {{ accountStore.history.coName }}</div>
-              <div>គណនេយ្យករ : {{ accountStore.history.aaName }} </div>
+              <div>បេឡាធិកា   : {{ accountStore.history.aaName }} </div>
             </div>
           </div>
 

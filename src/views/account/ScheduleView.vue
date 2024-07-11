@@ -39,15 +39,15 @@ const printTable = () => {
 <template>
   <UserLayout>
     <AccountLayout>
-      <div class="flex justify-end relative top-[10%] right-[10%] cursor-pointer ">
+      
+      <div class="bg-white px-28 py-32 w-3/5 p-10 rounded-lg mx-auto mt-10">
+        <div class="bg-white tablePrint">
+          <div class="flex justify-end relative top-[10%] right-[10%] cursor-pointer ">
         <div class="">
           <img @click="printTable()" alt="Vue logo" class=" w-8 h-8 mr-[2px]" src="@/assets/icon/print.svg" />
           <p class="text-[16px] font-semibold">prinf</p>
         </div>
       </div>
-      <div class="bg-white px-28 py-32 w-3/5 p-10 rounded-lg mx-auto mt-10">
-        <div class="bg-white tablePrint">
-
           <div class="grid grid-rows-2">
             <div class="font-bold underline text-2xl text-black m-auto capitalize">Love Microfinance LTD.</div>
             <div class="m-auto text-[18px] font-semibold">តារាងកាលវិភាគសងប្រាក់</div>
@@ -85,7 +85,7 @@ const printTable = () => {
               <div>ឈ្មោះអតិថិជន : {{ accountStore.schedule.firsMemberName }}</div>
               <div>ឈ្មោះអតិថិជន : {{ accountStore.schedule.secondMemberName }}</div>
               <div>មន្រ្ដីឥណទាន : {{ accountStore.schedule.coName }}</div>
-              <div>បេឡា : {{ accountStore.schedule.aaName }} ខែ</div>
+              <div>បេឡាធិកា : {{ accountStore.schedule.aaName }} ខែ</div>
             </div>
           </div>
 
@@ -93,19 +93,27 @@ const printTable = () => {
           <div class="overflow-x-auto">
             <table class="table">
               <!-- head -->
-              <thead>
-                <tr>
-                  <th>ល.រ</th>
-                  <th>សមតុល្យប្រាក់ដើម</th>
-                  <th>កាលបរិច្ឆេទសងប្រាក់</th>
-                  <th>ការប្រាក់</th>
-                  <th>ប្រាក់ដើម</th>
-                  <th>ប្រាក់ត្រូវបង់</th>
-                </tr>
+              <thead class="my-22">
+                <!-- <tr>
+                  <td>ល.រ</td>
+                  <td>សមតុល្យប្រាក់ដើម</td>
+                  <td>កាលបរិច្ឆេទសងប្រាក់</td>
+                  <td>ការប្រាក់</td>
+                  <td>ប្រាក់ដើម</td>
+                  <td>ប្រាក់ត្រូវបង់</td>
+                </tr> -->
               </thead>
               <tbody>
+                <tr>
+                  <td>ល.រ</td>
+                  <td>សមតុល្យប្រាក់ដើម</td>
+                  <td>កាលបរិច្ឆេទសងប្រាក់</td>
+                  <td>ការប្រាក់</td>
+                  <td>ប្រាក់ដើម</td>
+                  <td>ប្រាក់ត្រូវបង់</td>
+                </tr>
                 <tr v-for="(row, index) in accountStore.schedule.table" :key="row.id">
-                  <th>{{ index + 1 }}</th>
+                  <td>{{ index + 1 }}</td>
                   <td>{{ row.os }}</td>
                   <td>{{ row.dueDate }}</td>
                   <td>{{ row.interest }}</td>
